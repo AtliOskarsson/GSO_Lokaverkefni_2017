@@ -9,7 +9,7 @@ drop table if exists tegund;
 drop table if exists utgefandi;
 
 create table flytjandi (
-	ID int primary key,
+	ID int auto_increment primary key,
 	nafn varchar,
 	faedingardagur varchar,
 	lysing varchar,
@@ -17,22 +17,31 @@ create table flytjandi (
 	tegund_flytjanda varchar
 );
 
-create table diskur (
-	ID INT primary key,
-	nafn varchar,
-	utgafudagur varchar,
-	tegund_disks varchar
-)
+
+
+create table diskur(
+	ID INT auto_increment primary key,
+	nafn varchar(255),
+	utgafudagur date,
+	tegund_ID INT,
+	log text,
+	utgefandi_ID INT
+);
 
 create table lag (
-	ID INT primary key,
+	ID INT auto_increment primary key,
     nafn varchar,
     lengd varchar,
     texti varchar,
     flokkur varchar
-)
+);
+
+create table tegund(
+	ID INT auto_increment primary key,
+	nafn varchar(255)
+);
 
 create table flokkur (
-	ID INT primary key,
+	ID INT primary key auto_increment,
     nafn varchar
-)
+);
