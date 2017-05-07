@@ -8,40 +8,43 @@ drop table if exists flokkur;
 drop table if exists tegund;
 drop table if exists utgefandi;
 
-create table flytjandi (
+create table flokkur(
 	ID int auto_increment primary key,
-	nafn varchar,
-	faedingardagur varchar,
-	lysing varchar,
-	danardagur varchar,
-	tegund_flytjanda varchar
+    nafn varchar(50)
 );
-
-
-
-create table diskur(
-	ID INT auto_increment primary key,
-	nafn varchar(255),
-	utgafudagur date,
-	tegund_ID INT,
-	log text,
-	utgefandi_ID INT
+create table flytjandi(
+	ID int auto_increment primary key,
+    nafn varchar(50),
+    faedingardagur date,
+    danardagur date,
+    flokkur_ID int,
+    FOREIGN KEY (flokkur_ID) REFERENCES flokkur(ID)
 );
-
-create table lag (
-	ID INT auto_increment primary key,
-    nafn varchar,
-    lengd varchar,
-    texti varchar,
-    flokkur varchar
+create table utgefandi(
+	ID int auto_increment primary key,
+    nafn varchar(50)
 );
-
 create table tegund(
-	ID INT auto_increment primary key,
-	nafn varchar(255)
+	ID int auto_increment primary key,
+    nafn varchar(50)
 );
-
-create table flokkur (
-	ID INT primary key auto_increment,
-    nafn varchar
+create table diskur(
+	ID int auto_increment primary key,
+    nafn varchar(50),
+    utgafudagur date,
+    tegund_ID int,
+    log text,
+    utgefandi_ID int,
+    foreign key (tegund_ID) references tegund(ID),
+    foreign key (utgefandi_ID) references utgefandi(ID)
+);
+create table lag(
+	ID int auto_increment primary key,
+    nafn varchar(50),
+    lengd int(4),
+    texti longtext,
+    flytjandi_ID int,
+    diskur_ID int,
+    foreign key (flytjandi_ID) references flytjandi(ID),
+    foreign key (diskur_ID) references diskur(ID)
 );
